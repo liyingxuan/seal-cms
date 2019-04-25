@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 $api = app('Dingo\Api\Routing\Router');
-$api->version('v1', function ($api) {
+$api->version('v1', ['middleware' => 'jwt.auth'], function ($api) {
 
 });
