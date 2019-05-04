@@ -1,7 +1,7 @@
 {
-    "name": "Seal SC",
-    "description": "Seal SC",
-    "keywords": ["framework", "laravel"],
+    "name": "sealsc/laravel",
+    "description": "Seal sc cms & api",
+    "keywords": ["seal", "sealsc", "seal-sc"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -10,6 +10,7 @@
         "encore/laravel-admin": "^1.6",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
+        "laravel/passport": "4.0.x-dev",
         "laravel/tinker": "~1.0",
         "tymon/jwt-auth": "dev-develop"
     },
