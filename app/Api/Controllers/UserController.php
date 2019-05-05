@@ -95,7 +95,7 @@ class UserController extends Controller
      */
     public function verification($token)
     {
-        $user = User::where('verification_token',$token)->first();
+        $user = User::where('verification_token', $token)->first();
         $user->verified = true;
         $user->verification_token = null;
         $user->save();
@@ -113,6 +113,11 @@ class UserController extends Controller
     public function details()
     {
         $user = Auth::user();
-        return response()->json(['data' => $user], $this->successStatus);
+        $ret = [
+            'id' => $user['id'],
+            'name' => $user['name'],
+            'email' => $user['email'],
+        ];
+        return response()->json(['data' => $ret], $this->successStatus);
     }
 }
