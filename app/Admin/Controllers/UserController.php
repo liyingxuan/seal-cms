@@ -22,15 +22,15 @@ class UserController extends Controller
      */
     public function index(Content $content)
     {
-        $content->header('注册用户列表');
-        $content->description('管理注册用户和查看相关信息');
-        $content->breadcrumb(
-            ['text' => '首页', 'url' => '/admin'],
-            ['text' => '用户管理', 'url' => '/admin/users'],
-            ['text' => '编辑用户']
-        );
-
-        return $content->body($this->grid());
+        return $content
+            ->header('注册用户')
+            ->description('管理注册用户和查看相关信息')
+            ->breadcrumb(
+                ['text' => '首页', 'url' => '/'],
+                ['text' => '用户管理', 'url' => '/users'],
+                ['text' => '用户列表']
+            )
+            ->body($this->grid());
     }
 
     /**
@@ -95,7 +95,7 @@ class UserController extends Controller
         $grid->id('ID')->sortable();
         $grid->name('Name');
         $grid->email('Email');
-        $grid->verified('verified');
+        $grid->verified('Verified');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
