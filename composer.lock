@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "332e9e2b5c75a1cf0fd4978e57a800fa",
+    "content-hash": "53cdbae566f1d6c3c79bc26632119aa5",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -719,16 +719,16 @@
         },
         {
             "name": "encore/laravel-admin",
-            "version": "v1.6.12",
+            "version": "v1.6.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/z-song/laravel-admin.git",
-                "reference": "8613f6b268dccd6c1864f474c377712c5c7df27c"
+                "reference": "3e65086f806b54699145f58af53843e5dbbb7994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/8613f6b268dccd6c1864f474c377712c5c7df27c",
-                "reference": "8613f6b268dccd6c1864f474c377712c5c7df27c",
+                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/3e65086f806b54699145f58af53843e5dbbb7994",
+                "reference": "3e65086f806b54699145f58af53843e5dbbb7994",
                 "shasum": ""
             },
             "require": {
@@ -786,7 +786,7 @@
                 "grid",
                 "laravel"
             ],
-            "time": "2019-04-23T05:24:55+00:00"
+            "time": "2019-05-02T06:18:56+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -1207,6 +1207,69 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jrean/laravel-user-verification",
+            "version": "v5.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jrean/laravel-user-verification.git",
+                "reference": "cd0e9394037b4fd7c9688242474993bb7463163e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jrean/laravel-user-verification/zipball/cd0e9394037b4fd7c9688242474993bb7463163e",
+                "reference": "cd0e9394037b4fd7c9688242474993bb7463163e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.5.*",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.12",
+                "fzaninotto/faker": "^1.6",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.5",
+                "satooshi/php-coveralls": "^1.0",
+                "sllh/php-cs-fixer-styleci-bridge": "^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jrean\\UserVerification\\UserVerificationServiceProvider"
+                    ],
+                    "aliases": {
+                        "UserVerification": "Jrean\\UserVerification\\Facades\\UserVerification"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jrean\\UserVerification\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean Ragouin",
+                    "email": "go@askjong.com"
+                }
+            ],
+            "description": "User Email Verification For Laravel 5.*",
+            "keywords": [
+                "email activation",
+                "email verification",
+                "framework",
+                "laravel",
+                "user activation",
+                "user verification"
+            ],
+            "time": "2018-10-26T01:51:31+00:00"
         },
         {
             "name": "laravel/framework",

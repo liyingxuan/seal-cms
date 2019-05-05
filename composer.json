@@ -9,6 +9,7 @@
         "dingo/api": "v2.2.*",
         "encore/laravel-admin": "^1.6",
         "fideloper/proxy": "~3.3",
+        "jrean/laravel-user-verification": "5.*",
         "laravel/framework": "5.5.*",
         "laravel/passport": "4.0.x-dev",
         "laravel/tinker": "~1.0",

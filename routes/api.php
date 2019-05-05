@@ -13,7 +13,8 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
     $api->group(["namespace" => "App\Api\Controllers"], function ($api) {
         $api->post('login', 'UserController@login');
-        $api->post('register', 'LoginController@register');
+        $api->post('register', 'UserController@register');
+        $api->get('verification/{token}', 'UserController@verification');
 
         $api->group(['middleware' => 'auth:api'], function($api){
             $api->get('details', 'UserController@details');

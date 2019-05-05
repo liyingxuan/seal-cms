@@ -5,11 +5,15 @@ namespace App\Api\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Jrean\UserVerification\Traits\VerifiesUsers;
+use Jrean\UserVerification\Facades\UserVerification;
 
 class UserController extends Controller
 {
+    use VerifiesUsers;
 
     public $successStatus = 200;
 
@@ -42,18 +46,62 @@ class UserController extends Controller
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
-
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
         }
 
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
+        $params = $request->all();
+        $params['password'] = bcrypt($params['password']);
+        $user = User::create($params);
+
+        $this->sendVerificationEmail($user); // 给用户发送验证邮件
+
         $ret['token'] = $user->createToken('SealSC')->accessToken;
         $ret['email'] = $user->email;
-
         return response()->json(['data' => $ret], $this->successStatus);
+    }
+
+    /**
+     * 发送验证邮件
+     *
+     * @param $user
+     */
+    public function sendVerificationEmail($user)
+    {
+        // 生成用户的验证 token，并将用户的 verified 设置为 0
+        UserVerification::generate($user);
+
+        // 给用户发认证邮件
+        $params = [
+            'link' => url('api/verification', $user->verification_token) . '?email=' . urlencode($user->email),
+            'linkName' => 'Click Here'
+        ];
+        $to = $user->email;
+        $subject = 'Welcome to SealSC! Confirm Your Email';
+        Mail::send(
+            'emails.user-verification',
+            ['content' => $params],
+            function ($message) use ($to, $subject) {
+                $message->to($to)->subject($subject);
+            }
+        );
+    }
+
+    /**
+     * 验证邮箱和token
+     *
+     * @param $token
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function verification($token)
+    {
+        $user = User::where('verification_token',$token)->first();
+        $user->verified = true;
+        $user->verification_token = null;
+        $user->save();
+
+        session()->flash('success', 'Success!');
+        return redirect('https://sealsc.com');
     }
 
     /**
