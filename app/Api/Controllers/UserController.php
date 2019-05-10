@@ -20,6 +20,8 @@ class UserController extends Controller
     /**
      * Login
      *
+     * @group Users
+     *
      * @bodyParam email string required 邮箱
      * @bodyParam password string required 密码
      *
@@ -42,6 +44,8 @@ class UserController extends Controller
 
     /**
      * Register
+     *
+     * @group Users
      *
      * @bodyParam name string required 用户名
      * @bodyParam email string required 邮箱
@@ -108,6 +112,7 @@ class UserController extends Controller
     /**
      * 验证邮箱
      *
+     * @group Users
      * @response {}
      *
      * @param $token
@@ -128,6 +133,7 @@ class UserController extends Controller
      * Details
      * Postman测试需要参数：[{"key":"Authorization","value":"Bearer 【你的TOKEN】","description":""}]
      *
+     * @group Users
      * @response {
      *     "id": 2019,
      *     "name": "Seal SC",

@@ -42,6 +42,8 @@ $ php artisan apidoc:generate  # 更新API文档
 
 ```php
  *
+ * @group Users
+ * 
  * @bodyParam name string required Some description.
  * @bodyParam email string required Some description.
  * @bodyParam password string required Some description.
