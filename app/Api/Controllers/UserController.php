@@ -20,14 +20,21 @@ class UserController extends Controller
     /**
      * Login
      *
-     * @return \Illuminate\Http\Response
+     * @bodyParam email string required 邮箱
+     * @bodyParam password string required 密码
+     *
+     * @response {
+     *     "token": "2019xxx"
+     * }
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function login()
     {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
             $ret['token'] = $user->createToken('SealSC')->accessToken;
-            return response()->json(['data' => $ret], $this->successStatus);
+            return response()->json($ret, $this->successStatus);
         } else {
             return response()->json(['error' => 'Unauthorised'], 401);
         }
@@ -36,12 +43,23 @@ class UserController extends Controller
     /**
      * Register
      *
+     * @bodyParam name string required 用户名
+     * @bodyParam email string required 邮箱
+     * @bodyParam password string required 密码
+     * @bodyParam c_password string required 确认密码
+     *
+     * @response {
+     *     "token": "2019xxx",
+     *     "email": "sealsc@sealsc.com"
+     * }
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
@@ -58,7 +76,7 @@ class UserController extends Controller
 
         $ret['token'] = $user->createToken('SealSC')->accessToken;
         $ret['email'] = $user->email;
-        return response()->json(['data' => $ret], $this->successStatus);
+        return response()->json($ret, $this->successStatus);
     }
 
     /**
@@ -88,7 +106,9 @@ class UserController extends Controller
     }
 
     /**
-     * 验证邮箱和token
+     * 验证邮箱
+     *
+     * @response {}
      *
      * @param $token
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -107,6 +127,12 @@ class UserController extends Controller
     /**
      * Details
      * Postman测试需要参数：[{"key":"Authorization","value":"Bearer 【你的TOKEN】","description":""}]
+     *
+     * @response {
+     *     "id": 2019,
+     *     "name": "Seal SC",
+     *     "email": "sealsc@sealsc.com"
+     * }
      *
      * @return \Illuminate\Http\JsonResponse
      */

@@ -19,12 +19,41 @@ $ composer install
 $ php artisan admin:install
 $ php artisan jwt:secret
 $ php artisan passport:install
-```
 
-配置虚拟服务器
+$ php artisan apidoc:generate  # 生成API文档
+```
 
 #### 更新
 ```bash
 $ git fetch --all
 $ git reset --hard origin/master
+
+$ php artisan apidoc:generate  # 更新API文档
+```
+
+#### 开发
+```php
+
+
+```
+
+#### 文档
+> 主要是注释要写清，做自动生成。  
+
+```php
+ *
+ * @bodyParam name string required Some description.
+ * @bodyParam email string required Some description.
+ * @bodyParam password string required Some description.
+ * @bodyParam c_password string required Some description.
+ *
+ * @response {
+ *     "token": "2019xxx",
+ *     "email": "sealsc@sealsc.com"
+ * }
+ *
+```
+
+```bash
+$ php artisan apidoc:generate  # 更新API文档
 ```

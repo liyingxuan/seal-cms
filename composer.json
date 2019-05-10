@@ -13,6 +13,7 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "4.0.x-dev",
         "laravel/tinker": "~1.0",
+        "mpociot/laravel-apidoc-generator": "^3.7",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
